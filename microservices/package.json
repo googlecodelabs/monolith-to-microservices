@@ -8,12 +8,17 @@
     "start": "concurrently \"npm run frontend\" \"npm run products\" \"npm run orders\"",
     "frontend": "node ./src/frontend/server.js",
     "products": "node ./src/products/server.js",
-    "orders": "node ./src/orders/server.js"
+    "orders": "node ./src/orders/server.js",
+    "install-all": "npm-recursive-install"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^4.1.2"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
   }
 }
