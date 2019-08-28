@@ -14,7 +14,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "postbuild": "node scripts/post-build.js ./build ../microservices/frontend/public",
+    "postbuild": "node scripts/post-build.js ./build ../microservices/src/frontend/public",
     "build:monolith": "env-cmd -f .env.monolith npm run build",
     "postbuild:monolith": "node scripts/post-build.js ./build ../monolith/public",
     "test": "react-scripts test",

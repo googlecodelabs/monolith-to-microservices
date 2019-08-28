@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles(theme => ({
@@ -28,10 +24,12 @@ export default function Orders({ match }) {
   const [hasErrors, setErrors] = useState(false);
   const [order, setOrder] = useState({});
 
-  async function fetchOrder() {
+  const orderId = match.params.id;
+
+  async function fetchOrder(orderId) {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_ORDERS_URL}/${match.params.id}`
+        `${process.env.REACT_APP_ORDERS_URL}/${orderId}`
       );
       const order = await response.json();
       setOrder(order);
@@ -41,8 +39,8 @@ export default function Orders({ match }) {
   }
 
   useEffect(() => {
-    fetchOrder();
-  }, {});
+    fetchOrder(orderId);
+  }, [orderId]);
 
   return (
     <div className={classes.root}>
@@ -55,14 +53,35 @@ export default function Orders({ match }) {
       )}
       {!hasErrors && (
         <Paper className={classes.paper}>
-          <Typography component="p">
-            <b>Order ID: </b>
-            {order.id}
-          </Typography>
-          <Typography component="p">
-            <b>Date: </b>
-            {order.date}
-          </Typography>
+          <Grid
+            className={classes.grid}
+            container
+            spacing={3}
+            justify="flex-start"
+            alignItems="stretch"
+          >
+            <Grid item xs={12}>
+              <Typography variant="h5">{order.id}</Typography>
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <Typography component="p">
+                <b>Date: </b>
+                {order.date}
+              </Typography>
+              <Typography component="p">
+                <b>Cost: </b>${order.cost}
+              </Typography>
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <Typography component="p">
+                <b>Order Items: </b>
+              </Typography>
+              {order.items &&
+                order.items.map(item => (
+                  <Typography key={item}>{item}</Typography>
+                ))}
+            </Grid>
+          </Grid>
         </Paper>
       )}
     </div>
