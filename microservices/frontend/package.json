@@ -12,11 +12,10 @@
     "react-scripts": "3.1.1"
   },
   "scripts": {
-    "start": "env-cmd .env.local npm run react:start",
-    "react:start": "react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "build:monolith": "env-cmd -f .env.monolith npm run build",
-    "move:monolith": "node scripts/post-build.js",
+    "postbuild:monolith": "node scripts/post-build.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

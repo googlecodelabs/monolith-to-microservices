@@ -23,18 +23,17 @@ const useStyles = makeStyles(theme => ({
 export default function Products() {
   const classes = useStyles();
 
-  const [hasErrors, setErrors] = useState(true);
+  const [hasErrors, setErrors] = useState(false);
   const [products, setProducts] = useState([]);
 
   async function fetchData() {
-    const response = await fetch("http://localhost:8080/api/products");
-    response
-      .json()
-      .then(response => {
-        console.log(response);
-        setProducts(response);
-      })
-      .catch(err => setErrors(true));
+    try {
+      const response = await fetch(`${process.env.REACT_APP_PRODUCTS_URL}`);
+      const products = await response.json();
+      setProducts(products);
+    } catch (err) {
+      setErrors(true);
+    }
   }
 
   useEffect(() => {

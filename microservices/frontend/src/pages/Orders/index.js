@@ -10,8 +10,7 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    flexGrow: 1,
-    overflowX: "auto"
+    flexGrow: 1
   },
   paper: {
     padding: theme.spacing(3, 2)
@@ -24,18 +23,17 @@ const useStyles = makeStyles(theme => ({
 export default function Orders() {
   const classes = useStyles();
 
-  const [hasErrors, setErrors] = useState(true);
+  const [hasErrors, setErrors] = useState(false);
   const [orders, setOrders] = useState([]);
 
   async function fetchOrders() {
-    const response = await fetch("http://localhost:8081/api/orders");
-    response
-      .json()
-      .then(response => {
-        console.log(response);
-        setOrders(response);
-      })
-      .catch(err => setErrors(true));
+    try {
+      const response = await fetch(`${process.env.REACT_APP_ORDERS_URL}`);
+      const orders = await response.json();
+      setOrders(orders);
+    } catch (err) {
+      setErrors(true);
+    }
   }
 
   useEffect(() => {
