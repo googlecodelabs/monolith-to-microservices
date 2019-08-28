@@ -4,8 +4,8 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 //Load orders and products for pseudo database
-const orders = require("./data/orders.json").orders;
-const products = require("./data/products.json").products;
+const orders = require("../data/orders.json").orders;
+const products = require("../data/products.json").products;
 
 //Serve website
 app.use(express.static(path.join(__dirname, "..", "public")));
