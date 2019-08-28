@@ -4,7 +4,7 @@ const app = express();
 const port = process.env.PORT || 8091;
 
 //Load orders for pseudo database
-const orders = require("./orders.json").orders;
+const orders = require("../../data/orders.json").orders;
 
 //Enable cors
 app.use(cors());

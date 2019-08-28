@@ -4,11 +4,11 @@ const app = express();
 const port = process.env.PORT || 8090;
 
 //Serve website
-app.use(express.static(path.join(__dirname, "build")));
+app.use(express.static(path.join(__dirname, "public")));
 
 //Client side routing fix on page refresh or direct browsing to non-root directory
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "build", "index.html"), err => {
+  res.sendFile(path.join(__dirname, "public", "index.html"), err => {
     if (err) {
       res.status(500).send(err);
     }
@@ -16,4 +16,4 @@ app.get("/*", (req, res) => {
 });
 
 //Start the server
-app.listen(port, () => console.log(`Frontend listening on port ${port}!`));
+app.listen(port, () => console.log(`Frontend microservice listening on port ${port}!`));
