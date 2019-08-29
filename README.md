@@ -10,6 +10,7 @@
 
 ```
 cd monolith
+npm install
 npm start
 ```
 
@@ -43,6 +44,7 @@ docker run -p 8080:8080 monolith:1.0.0
 
 ```
 cd microservices
+npm install
 npm start
 ```
 
