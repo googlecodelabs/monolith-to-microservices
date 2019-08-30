@@ -34,7 +34,7 @@ docker build -t monolith:1.0.0 .
 #### To run the Docker image, execute the following commands:
 
 ```
-docker run -p 8080:8080 monolith:1.0.0
+docker run --rm -p 8080:8080 monolith:1.0.0
 ```
 
 
@@ -57,3 +57,62 @@ npm start
 ```
 
 ### That's it! You now have a perfectly functioning set of microservices running on your machine!
+
+### Docker
+
+#### To create a Docker image for the mmicroservices, you will have to create a Docker image for each service. Execute the following commands for each folder under the microservices folder.
+
+```
+cd microservices/src/frontend
+docker build -t frontend:1.0.0 .
+
+cd ../products
+docker build -t products:1.0.0 .
+
+cd ../orders
+docker build -t orders:1.0.0 .
+```
+
+#### To run the Docker image, execute the following commands:
+
+```
+docker run -d --rm -p 8090:8090 monolith:1.0.0
+docker run -d --rm -p 8091:8091 orders:1.0.0
+docker run -d --rm -p 8092:8092 products:1.0.0
+```
+
+#### To stop the containers, you will need to find the CONTAINER ID for each and stop them individually. See the steps below:
+
+```
+docker ps -a
+
+CONTAINER ID        IMAGE                        COMMAND                CREATED
+4c01db0b339c        frontend:1.0.0               bash                   17 seconds ago
+d7886598dbe2        orders:1.0.0                 bash                   17 seconds ago
+d85756f57265        products:1.0.0               bash                   17 seconds ago
+
+docker stop 4c01db0b339c
+docker stop d7886598dbe2
+docker stop d85756f57265
+```
+
+
+## React App
+
+#### The react-app folder contains a React application created from `create-react-app`. You can modify this fronted, but afterwards, you will need to build and move the static files to the monolith and microservices project. You can do this by running the commands below.
+
+### Build react-app for microservices
+
+```
+npm run build
+```
+
+#### This will run the build script to create the static files, but will utilize relative paths for the service calls since this is a monolith. It will also copy the static build files to the monolith public folder.
+
+### Build react-app for monolith
+
+```
+npm run build:monolith
+```
+
+#### This will run the build script to create the static files, but will utilize relative paths for the service calls since this is a monolith. It will also copy the static build files to the monolith public folder.
