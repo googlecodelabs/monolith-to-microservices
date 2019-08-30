@@ -99,20 +99,10 @@ docker stop d85756f57265
 
 ## React App
 
-#### The react-app folder contains a React application created from `create-react-app`. You can modify this fronted, but afterwards, you will need to build and move the static files to the monolith and microservices project. You can do this by running the commands below.
-
-### Build react-app for microservices
+#### The react-app folder contains a React application created from `create-react-app`. You can modify this fronted, but afterwards, you will need to build and move the static files to the monolith and microservices project. You can do this by running the standard create-react-app build command below:
 
 ```
 npm run build
 ```
 
-#### This will run the build script to create the static files, but will utilize relative paths for the service calls since this is a monolith. It will also copy the static build files to the monolith public folder.
-
-### Build react-app for monolith
-
-```
-npm run build:monolith
-```
-
-#### This will run the build script to create the static files, but will utilize relative paths for the service calls since this is a monolith. It will also copy the static build files to the monolith public folder.
+#### This will run the build script to create the static files two times. The first will build with relative URLs and copy the static files to the monolith/public folder. The second run will build with the standard microservices URLs and copy the static files to the microservices/src/frontned/public folder.

@@ -3,7 +3,7 @@ const ncp = require("ncp");
 const rimraf = require("rimraf");
 
 if(process.argv.length < 4){
-  console.error("Invalid arguments, two arguments are required <source> <destination>")
+  console.error("Invalid arguments, two arguments are required <source> <destination>");
 }
 
 //const sourceFolder = path.join(__dirname, "..", "build");
@@ -12,17 +12,21 @@ if(process.argv.length < 4){
 const sourceFolder = process.argv[2];
 const destFolder = process.argv[3];
 
+console.log(`Deleting stale folder: ${destFolder}`);
+
 rimraf(destFolder, err => {
   if (err) {
-    return console.error("Failed to delete destination folder!");
+    console.log(`Failed to delete stale destination folder: ${destFolder}`);
+    return;
   }
-  console.log("Deleted destination folder...");
+  console.log(`Deleted stale destination folder: ${destFolder}`);
+
+  console.log(`Copying files from ${sourceFolder} to ${destFolder}`)
 
   ncp(sourceFolder, destFolder, err => {
     if (err) {
-      return console.error("Failed to copy build to monolith app!");
+      return console.error(`Failed to copy ${sourceFolder} to ${destFolder}!`);
     }
-    console.log("Copied source to destination successfully!");
-    console.log("Post build complete!");
+    console.log(`Copied ${sourceFolder} to ${destFolder} successfully!`);
   });
 });
