@@ -25,7 +25,7 @@ npm install
 echo "Completed."
 
 echo "Installing React app dependencies..."
-cd ./react-app
+cd ../react-app
 npm install
 echo "Completed."
 
