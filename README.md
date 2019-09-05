@@ -6,13 +6,20 @@
 
 ### This project is used by the Google Cloud Platform team to demonstrate different services within Google Cloud. This project contains two versions of the same application, one architected as a monolith and the other as a set of microservices.
 
+## Setup
+
+```
+git clone https://github.com/GoogleCloudPlatform/monolith-to-microservices
+cd monolith-to-microservices
+./setup.sh
+```
+
 ## Monolith
 
 #### To run the monolith project use the following commands from the top level directory:
 
 ```
 cd monolith
-npm install
 npm start
 ```
 
@@ -46,7 +53,6 @@ docker run --rm -p 8080:8080 monolith:1.0.0
 
 ```
 cd microservices
-npm install
 npm start
 ```
 
