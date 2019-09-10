@@ -9,7 +9,7 @@
 ## Setup
 
 ```
-git clone https://github.com/GoogleCloudPlatform/monolith-to-microservices
+git clone https://github.com/googlecodelabs/monolith-to-microservices
 cd monolith-to-microservices
 ./setup.sh
 ```
