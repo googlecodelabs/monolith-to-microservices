@@ -46,12 +46,6 @@ docker build -t monolith:1.0.0 .
 docker run --rm -p 8080:8080 monolith:1.0.0
 ```
 
-### Cloud Run
-
-#### Deploy to cloud run with the Cloud Run button:
-
-[![Run on Google Cloud](https://storage.googleapis.com/cloudrun/button.svg)](https://console.cloud.google.com/cloudshell/editor?shellonly=true&cloudshell_image=gcr.io/cloudrun/button&cloudshell_git_repo=https://github.com/googlecodelabs/monolith-to-microservices&cloudshell_working_dir=monolith)
-
 
 ## Microservices
 
