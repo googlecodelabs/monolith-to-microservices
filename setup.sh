@@ -33,4 +33,4 @@ printf "Building React app and placing into sub projects..."
 npm run build > /dev/null 2>&1
 printf "Completed.\n\n"
 
-printf "Script completed successfully!"
+printf "Script completed successfully!\n"
