@@ -59,9 +59,9 @@ npm start
 ### You should see output similar to the following:
 
 ```
-[0] Frontend microservice listening on port 8090!
-[2] Orders microservice listening on port 8091!
-[1] Products microservice listening on port 8092!
+[0] Frontend microservice listening on port 8080!
+[2] Orders microservice listening on port 8081!
+[1] Products microservice listening on port 8082!
 ```
 
 ### That's it! You now have a perfectly functioning set of microservices running on your machine!
@@ -84,9 +84,9 @@ docker build -t orders:1.0.0 .
 #### To run the Docker image, execute the following commands:
 
 ```
-docker run -d --rm -p 8090:8090 monolith:1.0.0
-docker run -d --rm -p 8091:8091 orders:1.0.0
-docker run -d --rm -p 8092:8092 products:1.0.0
+docker run -d --rm -p 8080:8080 monolith:1.0.0
+docker run -d --rm -p 8081:8081 orders:1.0.0
+docker run -d --rm -p 8082:8082 products:1.0.0
 ```
 
 #### To stop the containers, you will need to find the CONTAINER ID for each and stop them individually. See the steps below:
