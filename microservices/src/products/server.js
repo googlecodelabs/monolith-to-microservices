@@ -16,7 +16,7 @@ limitations under the License.
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const port = process.env.PORT || 8092;
+const port = process.env.PORT || 8082;
 
 //Load product for pseudo database
 const products = require("./data/products.json").products;
