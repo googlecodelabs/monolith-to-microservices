@@ -53,3 +53,15 @@ npm run build
 printf "Completed.\n\n"
 
 printf "Setup completed successfully!\n"
+
+if [[ -v CLOUD_SHELL ]]
+then
+  printf "###############################################################################\n"
+  printf "#                                   NOTICE                                    #\n"
+  printf "#                                                                             #\n"
+  printf "# Make sure you have a compatible nodeJS version with the following command:  #\n"
+  printf "#                                                                             #\n"
+  printf "# nvm install --lts                                                           #\n"
+  printf "#                                                                             #\n"
+  printf "###############################################################################\n"
+fi
