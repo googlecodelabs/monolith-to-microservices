@@ -13,27 +13,43 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-printf "Checking for required npm version..."
-npm install -g npm > ~/monolith-to-microservices/logs/npm.txt 2>&1
-printf "Completed.\n"
 
-printf "Installing monolith dependencies..."
+set -eEuo pipefail
+
+if [[ -v CLOUD_SHELL ]]
+then
+  printf "Setting up NVM...\n"
+  export NVM_DIR="/usr/local/nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  printf "Completed.\n\n"
+  
+  printf "Updating nodeJS version...\n"
+  nvm install --lts
+  printf "Completed.\n\n"
+else
+  printf "Checking for required npm version...\n"
+  npm install -g npm
+  printf "Completed.\n\n"
+fi
+
+printf "Installing monolith dependencies...\n"
 cd ./monolith
-npm install > ~/monolith-to-microservices/logs/monolith.txt 2>&1
-printf "Completed.\n"
-
-printf "Installing microservies dependencies..."
-cd ../microservices
-npm install > ~/monolith-to-microservices/logs/microservices.txt 2>&1
-printf "Completed.\n"
-
-printf "Installing React app dependencies..."
-cd ../react-app
-npm install > ~/monolith-to-microservices/logs/react.txt 2>&1
-printf "Completed.\n"
-
-printf "Building React app and placing into sub projects..."
-npm run build > ~/monolith-to-microservices/logs/build.txt 2>&1
+npm install
 printf "Completed.\n\n"
 
-printf "Script completed successfully!\n"
+printf "Installing microservies dependencies...\n"
+cd ../microservices
+npm install
+printf "Completed.\n\n"
+
+printf "Installing React app dependencies...\n"
+cd ../react-app
+npm install
+printf "Completed.\n\n"
+
+printf "Building React app and placing into sub projects...\n"
+npm run build
+printf "Completed.\n\n"
+
+printf "Setup completed successfully!\n"
