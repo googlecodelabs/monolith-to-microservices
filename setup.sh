@@ -38,7 +38,7 @@ cd ./monolith
 npm install
 printf "Completed.\n\n"
 
-printf "Installing microservies dependencies...\n"
+printf "Installing microservices dependencies...\n"
 cd ../microservices
 npm install
 printf "Completed.\n\n"
