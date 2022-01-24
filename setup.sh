@@ -54,7 +54,7 @@ printf "Completed.\n\n"
 
 printf "Setup completed successfully!\n"
 
-if [ !-z "$CLOUD_SHELL" ]
+if [ ! -z "$CLOUD_SHELL" ]
 then
   printf "\n"
   printf "###############################################################################\n"
