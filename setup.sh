@@ -14,14 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+printf "Checking for required npm version...\n"
+npm install -g npm > /dev/null 2>&1
+printf "Completed.\n\n"
+
 set -eEo pipefail
 
-if [ -z "$CLOUD_SHELL" ]
+if [ ! -z "$CLOUD_SHELL" ]
 then
-  printf "Checking for required npm version...\n"
-  npm install -g npm
-  printf "Completed.\n\n"
-else
   printf "Setting up NVM...\n"
   export NVM_DIR="/usr/local/nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -52,12 +52,11 @@ printf "Building React app and placing into sub projects...\n"
 npm run build
 printf "Completed.\n\n"
 
-if [ -z "$CLOUD_SHELL" ]
-then
-  printf "Setup completed successfully!\n"
-else
-  printf "Setup completed successfully!\n\n"
+printf "Setup completed successfully!\n"
 
+if [ !-z "$CLOUD_SHELL" ]
+then
+  printf "\n"
   printf "###############################################################################\n"
   printf "#                                   NOTICE                                    #\n"
   printf "#                                                                             #\n"
