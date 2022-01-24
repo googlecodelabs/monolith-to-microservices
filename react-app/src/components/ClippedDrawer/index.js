@@ -14,21 +14,23 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
+import {
+  Drawer,
+  AppBar,
+  CssBaseline,
+  Toolbar,
+  List,
+  Typography,
+  ListItem,
+  ListItemText,
+  Box,
+} from "@mui/material";
 
 import {
   BrowserRouter as Router,
   Route,
   Switch,
-  NavLink
+  NavLink,
 } from "react-router-dom";
 
 //Import Pages
@@ -40,42 +42,17 @@ import NotFound from "../../pages/NotFound";
 
 const drawerWidth = 200;
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: "flex"
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1
-  },
-  logo: {
-    maxHeight: "60px",
-    marginRight: theme.spacing(1)
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0
-  },
-  drawerPaper: {
-    width: drawerWidth
-  },
-  drawerItem: {
-    color: "rgba(0, 0, 0, 0.54)"
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3)
-  },
-  toolbar: theme.mixins.toolbar
-}));
-
 export default function ClippedDrawer() {
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
+    <Box sx={{ display: "flex" }}>
       <Router>
         <CssBaseline />
-        <AppBar position="fixed" className={classes.appBar}>
+        <AppBar
+          position="fixed"
+          sx={{
+            zIndex: (theme) => theme.zIndex.drawer + 1,
+          }}
+        >
           <Toolbar>
             <Typography variant="h6" noWrap>
               Fancy Store
@@ -83,18 +60,22 @@ export default function ClippedDrawer() {
           </Toolbar>
         </AppBar>
         <Drawer
-          className={classes.drawer}
           variant="permanent"
-          classes={{
-            paper: classes.drawerPaper
+          sx={{
+            width: drawerWidth,
+            flexShrink: 0,
+            [`& .MuiDrawer-paper`]: {
+              width: drawerWidth,
+              boxSizing: "border-box",
+            },
           }}
         >
-          <div className={classes.toolbar} />
+          <Toolbar />
           <List>
             <ListItem
               component={NavLink}
               exact
-              className={classes.drawerItem}
+              sx={{ color: "rgba(0, 0, 0, 0.54)" }}
               activeClassName="Mui-selected"
               to="/"
             >
@@ -103,7 +84,7 @@ export default function ClippedDrawer() {
             <ListItem
               component={NavLink}
               exact
-              className={classes.drawerItem}
+              sx={{ color: "rgba(0, 0, 0, 0.54)" }}
               activeClassName="Mui-selected"
               to="/products"
             >
@@ -111,7 +92,7 @@ export default function ClippedDrawer() {
             </ListItem>{" "}
             <ListItem
               component={NavLink}
-              className={classes.drawerItem}
+              sx={{ color: "rgba(0, 0, 0, 0.54)" }}
               activeClassName="Mui-selected"
               to="/orders"
             >
@@ -119,17 +100,27 @@ export default function ClippedDrawer() {
             </ListItem>
           </List>
         </Drawer>
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
+        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <Toolbar />
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/products" component={Products} />
-            <Route path="/orders/:id" component={OrderDetails} />
-            <Route path="/orders" component={Orders} />
-            <Route component={NotFound} />
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route exact path="/products">
+              <Products />
+            </Route>
+            <Route path="/orders/:id">
+              <OrderDetails />
+            </Route>
+            <Route path="/orders">
+              <Orders />
+            </Route>
+            <Route>
+              <NotFound />
+            </Route>
           </Switch>
-        </main>
+        </Box>
       </Router>
-    </div>
+    </Box>
   );
 }

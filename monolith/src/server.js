@@ -30,7 +30,7 @@ app.get("/service/products", (req, res) => res.json(products));
 
 //Get products by ID
 app.get("/service/products/:id", (req, res) =>
-  res.json(products.find(product => product.id === req.params.id))
+  res.json(products.find((product) => product.id === req.params.id))
 );
 
 //Get all orders
@@ -38,12 +38,12 @@ app.get("/service/orders", (req, res) => res.json(orders));
 
 //Get orders by ID
 app.get("/service/orders/:id", (req, res) =>
-  res.json(orders.find(order => order.id === req.params.id))
+  res.json(orders.find((order) => order.id === req.params.id))
 );
 
 //Client side routing fix on page refresh or direct browsing to non-root directory
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "..",  "public", "index.html"), err => {
+  res.sendFile(path.join(__dirname, "..", "public", "index.html"), (err) => {
     if (err) {
       res.status(500).send(err);
     }

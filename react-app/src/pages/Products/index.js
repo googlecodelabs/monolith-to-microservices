@@ -14,34 +14,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1
-  },
-  grid: {
-    width: "1000px",
-    margin: "0 auto"
-  },
-  paper: {
-    padding: theme.spacing(3, 2)
-  },
-  media: {
-    height: 0,
-    paddingTop: "56.25%" // 16:9
-  }
-}));
+import {
+  Box,
+  Paper,
+  Card,
+  CardMedia,
+  CardContent,
+  Grid,
+  Typography,
+} from "@mui/material";
 
 export default function Products() {
-  const classes = useStyles();
-
   const [hasErrors, setErrors] = useState(false);
   const [products, setProducts] = useState([]);
 
@@ -60,22 +43,34 @@ export default function Products() {
   }, []);
 
   return (
-    <div className={classes.root}>
+    <Box sx={{ flexGrow: 1 }}>
       {hasErrors && (
-        <Paper className={classes.paper}>
+        <Paper
+          elevation={3}
+          sx={{
+            background: "#f99",
+            padding: (theme) => theme.spacing(3, 2),
+          }}
+        >
           <Typography component="p">
             An error has occurred, please try reloading the page.
           </Typography>
         </Paper>
       )}
       {!hasErrors && (
-        <Grid className={classes.grid} container spacing={3} justify="flex-start" alignItems="stretch">
-          {products.map(product => {
+        <Grid
+          sx={{ maxWidth: "1000px", margin: "0 auto" }}
+          container
+          spacing={3}
+          justify="flex-start"
+          alignItems="stretch"
+        >
+          {products.map((product) => {
             return (
               <Grid key={product.id} item md={4} xs={12}>
                 <Card>
                   <CardMedia
-                    className={classes.media}
+                    sx={{ height: 0, paddingTop: "56.25%" }}
                     image={product.picture}
                     title={product.name}
                   />
@@ -90,6 +85,6 @@ export default function Products() {
           })}
         </Grid>
       )}
-    </div>
+    </Box>
   );
 }

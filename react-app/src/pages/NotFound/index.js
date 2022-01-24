@@ -14,27 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1
-  },
-  paper: {
-    padding: theme.spacing(3, 2)
-  }
-}));
+import { Box, Paper, Typography } from "@mui/material";
 
 export default function Orders() {
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <Typography variant="h6" component="h6">Page not found</Typography>
+    <Box sx={{ flexGrow: 1 }}>
+      <Paper elevation={3} sx={{ padding: (theme) => theme.spacing(3, 2) }}>
+        <Typography component="p">Page not found</Typography>
       </Paper>
-    </div>
+    </Box>
   );
 }

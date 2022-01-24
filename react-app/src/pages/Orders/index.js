@@ -14,34 +14,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
+import { useHistory } from "react-router-dom";
+import {
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Paper,
+  Typography,
+} from "@mui/material";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1
-  },
-  paper: {
-    maxWidth: "800px",
-    margin: "0 auto",
-    padding: theme.spacing(3, 2)
-  },
-  table: {
-    minWidth: 650
-  },
-  tableRow: {
-    cursor: "pointer"
-  }
-}));
-
-export default function Orders({ history }) {
-  const classes = useStyles();
+export default function Orders() {
+  const history = useHistory();
 
   const [hasErrors, setErrors] = useState(false);
   const [orders, setOrders] = useState([]);
@@ -61,18 +47,31 @@ export default function Orders({ history }) {
   }, []);
 
   return (
-    <div className={classes.root}>
+    <Box sx={{ flexGrow: 1 }}>
       {hasErrors && (
-        <Paper className={classes.paper}>
+        <Paper
+          elevation={3}
+          sx={{
+            background: "#f99",
+            padding: (theme) => theme.spacing(3, 2),
+          }}
+        >
           <Typography component="p">
             An error has occurred, please try reloading the page.
           </Typography>
         </Paper>
       )}
       {!hasErrors && (
-        <Paper className={classes.paper}>
+        <Paper
+          elevation={3}
+          sx={{
+            maxWidth: "800px",
+            margin: "0 auto",
+            padding: (theme) => theme.spacing(3, 2),
+          }}
+        >
           <Typography variant="h5">Orders</Typography>
-          <Table className={classes.table}>
+          <Table sx={{ minWidth: "650px" }}>
             <TableHead>
               <TableRow>
                 <TableCell>Order Id</TableCell>
@@ -82,10 +81,10 @@ export default function Orders({ history }) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {orders.map(order => (
+              {orders.map((order) => (
                 <TableRow
                   hover
-                  className={classes.tableRow}
+                  sx={{ cursor: "pointer" }}
                   key={order.id}
                   onClick={() => {
                     history.push(`/orders/${order.id}`);
@@ -105,6 +104,6 @@ export default function Orders({ history }) {
           </Table>
         </Paper>
       )}
-    </div>
+    </Box>
   );
 }

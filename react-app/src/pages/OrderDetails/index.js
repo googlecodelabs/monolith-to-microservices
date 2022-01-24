@@ -14,27 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
+import { useRouteMatch } from "react-router-dom";
+import { Box, Paper, Grid, Typography } from "@mui/material";
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1
-  },
-  paper: {
-    maxWidth: "800px",
-    margin: "0 auto",
-    padding: theme.spacing(3, 2)
-  },
-  table: {
-    minWidth: 650
-  }
-}));
-
-export default function Orders({ match }) {
-  const classes = useStyles();
+export default function OrderDetails() {
+  const match = useRouteMatch();
 
   const [hasErrors, setErrors] = useState(false);
   const [order, setOrder] = useState({});
@@ -58,21 +42,33 @@ export default function Orders({ match }) {
   }, [orderId]);
 
   return (
-    <div className={classes.root}>
+    <Box sx={{ flexGrow: 1 }}>
       {hasErrors && (
-        <Paper className={classes.paper}>
+        <Paper
+          elevation={3}
+          sx={{
+            background: "#f99",
+            padding: (theme) => theme.spacing(3, 2),
+          }}
+        >
           <Typography component="p">
             An error has occurred, please try reloading the page.
           </Typography>
         </Paper>
       )}
       {!hasErrors && (
-        <Paper className={classes.paper}>
+        <Paper
+          elevation={3}
+          sx={{
+            maxWidth: "800px",
+            margin: "0 auto",
+            padding: (theme) => theme.spacing(3, 2),
+          }}
+        >
           <Grid
-            className={classes.grid}
             container
             spacing={3}
-            justify="flex-start"
+            justifyContent="flex-start"
             alignItems="stretch"
           >
             <Grid item xs={12}>
@@ -92,13 +88,13 @@ export default function Orders({ match }) {
                 <b>Order Items: </b>
               </Typography>
               {order.items &&
-                order.items.map(item => (
+                order.items.map((item) => (
                   <Typography key={item}>{item}</Typography>
                 ))}
             </Grid>
           </Grid>
         </Paper>
       )}
-    </div>
+    </Box>
   );
 }
