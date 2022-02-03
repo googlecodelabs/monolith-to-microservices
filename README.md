@@ -8,7 +8,7 @@
 
 ## Setup
 
-### NOTE: Make sure you have a newer version of NodeJS (16.13.0) or newer
+### **NOTE:** Make sure you have a newer version of NodeJS (16.13.0) or newer (in Cloud Shell you can run `nvm install --lts`)
 
 ```bash
 git clone https://github.com/googlecodelabs/monolith-to-microservices
