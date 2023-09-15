@@ -16,8 +16,9 @@
 
 set -eEo pipefail
 
-if [ ! -z "$CLOUD_SHELL" ]; then
+if [ -z "$CLOUD_SHELL" ]; then
   printf "Checking for required npm version...\n"
+
   npm install -g npm > /dev/null 2>&1
   printf "Completed.\n\n"
 
@@ -53,7 +54,7 @@ printf "Completed.\n\n"
 
 printf "Setup completed successfully!\n"
 
-if [ ! -z "$CLOUD_SHELL" ]; then
+if [ -z "$CLOUD_SHELL" ]; then
   printf "\n"
   printf "###############################################################################\n"
   printf "#                                   NOTICE                                    #\n"
